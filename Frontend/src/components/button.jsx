@@ -2,12 +2,14 @@ import { CircularProgress } from "@mui/material";
 import React from "react";
 import styled from "styled-components";
 
-const Button = styled.div`
+const StyledButton = styled.button`
+  border: none;
   border-radius: 10px;
   color: white;
   font-size: 14px;
   font-weight: 600;
-  cursor: pointer;
+  cursor: ${({ $isDisabled, $isLoading }) =>
+    $isDisabled || $isLoading ? "not-allowed" : "pointer"};
   transition: all 0.3s ease;
   display: flex;
   align-items: center;
@@ -15,68 +17,57 @@ const Button = styled.div`
   gap: 6px;
   height: min-content;
   padding: 10px 24px;
+
+  background: ${({ $variant, theme }) =>
+    $variant === "secondary" ? theme.secondary : theme.primary};
+
+  opacity: ${({ $isDisabled, $isLoading }) =>
+    $isDisabled ? 0.4 : $isLoading ? 0.8 : 1};
+
+  flex: ${({ $flex }) => ($flex ? 1 : "initial")};
+
   @media (max-width: 600px) {
     padding: 8px 12px;
   }
-
-  ${({ type, theme }) =>
-    type === "secondary"
-      ? `
-  background: ${theme.secondary};
-  `
-      : `
-  background: ${theme.primary};
-`}
-
-  ${({ isDisabled }) =>
-    isDisabled &&
-    `
-  opacity: 0.4;
-  cursor: not-allowed;
-
-  `}
-  ${({ isLoading }) =>
-    isLoading &&
-    `
-    opacity: 0.8;
-  cursor: not-allowed;
-`}
-${({ flex }) =>
-    flex &&
-    `
-    flex: 1;
-`}
 `;
 
-const button = ({
+const Button = ({
   text,
-  isLoading,
-  isDisabled,
+  isLoading = false,
+  isDisabled = false,
   rightIcon,
   leftIcon,
-  type,
+  type = "primary",
   onClick,
-  flex,
+  flex = false,
 }) => {
+  const handleClick = () => {
+    if (!isDisabled && !isLoading && onClick) {
+      onClick();
+    }
+  };
+
   return (
-    <Button
-      onClick={() => !isDisabled && !isLoading && onClick()}
-      isDisabled={isDisabled}
-      type={type}
-      isLoading={isLoading}
-      flex={flex}
+    <StyledButton
+      type="button"
+      onClick={handleClick}
+      disabled={isDisabled || isLoading}
+      $isDisabled={isDisabled}
+      $isLoading={isLoading}
+      $variant={type}
+      $flex={flex}
     >
-      {isLoading && (
-        <CircularProgress
-          style={{ width: "18px", height: "18px", color: "inherit" }}
-        />
-      )}
-      {leftIcon}
+      {isLoading && <CircularProgress size={18} sx={{ color: "inherit" }} />}
+
+      {!isLoading && leftIcon}
+
       {text}
-      {isLoading && <> . . .</>}
-      {rightIcon}
-    </Button>
+
+      {isLoading && "..."}
+
+      {!isLoading && rightIcon}
+    </StyledButton>
   );
 };
 
-export default button;
+export default Button;
