@@ -8,49 +8,71 @@ import { CreatePost, GenerateImage } from "../api/index.js";
 
 const Form = styled.div`
   flex: 1;
-  padding: 16px 20px;
   display: flex;
   flex-direction: column;
-  gap: 9%;
-  justify-content: center;
+  gap: 28px;
+
+  padding: 10px;
 `;
 
 const Top = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 10px;
 `;
 
-const Title = styled.div`
-  font-size: 28px;
-  font-weight: 500;
+const Title = styled.h1`
+  margin: 0;
+  font-size: 34px;
+  font-weight: 700;
   color: ${({ theme }) => theme.text_primary};
+  line-height: 1.2;
 `;
 
-const Desc = styled.div`
-  font-size: 17px;
-  font-weight: 400;
+const Desc = styled.p`
+  margin: 0;
+  font-size: 16px;
+  line-height: 1.7;
   color: ${({ theme }) => theme.text_secondary};
 `;
 
 const Body = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 18px;
-  font-size: 12px;
-  font-weight: 400;
+  gap: 22px;
+`;
+
+const Note = styled.div`
+  padding: 14px 18px;
+  border-radius: 14px;
+
+  background: ${({ theme }) => theme.hover};
+  border: 1px solid ${({ theme }) => theme.border};
+
   color: ${({ theme }) => theme.text_secondary};
+  font-size: 14px;
+  line-height: 1.6;
 `;
 
 const Actions = styled.div`
   display: flex;
-  flex: 1;
-  gap: 8px;
+  gap: 16px;
+
+  @media (max-width: 650px) {
+    flex-direction: column;
+  }
 `;
 
 const ErrorMessage = styled.div`
-  color: red;
+  padding: 12px 16px;
+  border-radius: 12px;
+
+  background: rgba(239, 83, 80, 0.12);
+  border: 1px solid rgba(239, 83, 80, 0.35);
+
+  color: ${({ theme }) => theme.red};
   font-size: 14px;
+  font-weight: 500;
 `;
 
 const GenerateImageForm = ({
@@ -74,13 +96,13 @@ const GenerateImageForm = ({
       });
 
       const mimeType = response.data.mimeType || "image/png";
+
       setPost((previousPost) => ({
         ...previousPost,
         photo: `data:${mimeType};base64,${response.data.photo}`,
       }));
     } catch (error) {
       console.error(error);
-
       setError(error.response?.data?.message || "Failed to generate image");
     } finally {
       setGenerateImageLoading(false);
@@ -97,7 +119,6 @@ const GenerateImageForm = ({
       navigate("/");
     } catch (error) {
       console.error(error);
-
       setError(error.response?.data?.message || "Failed to create post");
     } finally {
       setCreatePostLoading(false);
@@ -107,8 +128,12 @@ const GenerateImageForm = ({
   return (
     <Form>
       <Top>
-        <Title>Generate image using a prompt</Title>
-        <Desc>Describe the image you want to generate.</Desc>
+        <Title>Create AI Artwork</Title>
+
+        <Desc>
+          Describe anything you can imagine and let AI generate a unique image.
+          When you're happy with the result, share it with the community.
+        </Desc>
       </Top>
 
       <Body>
@@ -127,7 +152,7 @@ const GenerateImageForm = ({
 
         <TextInput
           label="Image Prompt"
-          placeholder="Write a detailed image prompt"
+          placeholder="A futuristic city at sunset with flying cars..."
           name="prompt"
           textArea
           rows="8"
@@ -142,7 +167,10 @@ const GenerateImageForm = ({
 
         {error && <ErrorMessage>{error}</ErrorMessage>}
 
-        <div>You can post the generated image to the community showcase.</div>
+        <Note>
+          ✨ Generate your image first, preview it, and then publish it to the
+          community showcase.
+        </Note>
       </Body>
 
       <Actions>
@@ -156,12 +184,12 @@ const GenerateImageForm = ({
         />
 
         <Button
-          text="Post Image"
+          text="Publish Post"
           leftIcon={<CreateRounded />}
           type="secondary"
           flex
-          isDisabled={!post.name.trim() || !post.photo || !post.prompt.trim()}
           isLoading={createPostLoading}
+          isDisabled={!post.name.trim() || !post.photo || !post.prompt.trim()}
           onClick={createPost}
         />
       </Actions>

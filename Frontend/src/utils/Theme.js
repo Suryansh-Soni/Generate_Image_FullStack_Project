@@ -1,75 +1,95 @@
 export const darkTheme = {
-  bg: "#15171E",
-  bgLight: "#1C1E27",
-  bgDark: "#15171E",
+  // Backgrounds
+  bg: "#0B1120",
+  bgLight: "#111827",
+  bgDark: "#070C18",
 
-  primary: "#007AFF",
-  secondary: "#9747FF",
+  // Brand Colors
+  primary: "#7C3AED",
+  secondary: "#A855F7",
 
-  navbar: "#1C1E27",
-  arrow: "#AFAFB5",
+  // Navbar
+  navbar: "rgba(17, 24, 39, 0.75)",
+  arrow: "#C4B5FD",
 
-  menu_primary_text: "#F2F3F4",
-  menu_secondary_text: "#B1B2B3",
+  // Text
+  menu_primary_text: "#F8FAFC",
+  menu_secondary_text: "#CBD5E1",
 
-  text_primary: "#F2F3F4",
-  text_secondary: "#B1B2B3",
+  text_primary: "#F8FAFC",
+  text_secondary: "#CBD5E1",
 
-  card: "#1C1E27",
-  card_light: "#191924",
+  // Cards
+  card: "rgba(30, 41, 59, 0.72)",
+  card_light: "rgba(51, 65, 85, 0.60)",
 
-  disabled: "#B1B2B3",
+  // Disabled
+  disabled: "#64748B",
 
-  shadow: "#00000060",
+  // Shadows
+  shadow: "rgba(124, 58, 237, 0.25)",
 
+  // Base
   white: "#FFFFFF",
   black: "#000000",
 
-  green: "#12F775",
-  yellow: "#FFCC00",
-  red: "#EF5350",
-  orange: "#F7AD63",
+  // Status
+  green: "#22C55E",
+  yellow: "#FACC15",
+  red: "#EF4444",
+  orange: "#FB923C",
 
-  border: "#2D3039",
-  hover: "#252832",
-  input: "#1C1E27",
-  placeholder: "#8A8B91",
+  // Borders & Inputs
+  border: "rgba(255,255,255,0.08)",
+  hover: "rgba(124,58,237,0.12)",
+  input: "rgba(17,24,39,0.80)",
+  placeholder: "#94A3B8",
 };
 
 export const lightTheme = {
-  bg: "#F9F9F9",
+  // Backgrounds
+  bg: "#F8FAFC",
   bgLight: "#FFFFFF",
-  bgDark: "#F1F1F1",
+  bgDark: "#EEF2FF",
 
-  primary: "#007AFF",
-  secondary: "#9747FF",
+  // Brand Colors
+  primary: "#7C3AED",
+  secondary: "#A855F7",
 
-  navbar: "#FFFFFF",
-  arrow: "#5F6368",     
+  // Navbar
+  navbar: "rgba(255,255,255,0.90)",
+  arrow: "#6D28D9",
 
-  menu_primary_text: "#242B3F",
-  menu_secondary_text: "#6B7280",
+  // Text
+  menu_primary_text: "#111827",
+  menu_secondary_text: "#64748B",
 
-  text_primary: "#242B3F",
-  text_secondary: "#6B7280",
+  text_primary: "#111827",
+  text_secondary: "#64748B",
 
+  // Cards
   card: "#FFFFFF",
-  card_light: "#F5F5F5",
+  card_light: "#F3F4F6",
 
-  disabled: "#B1B2B3",
+  // Disabled
+  disabled: "#94A3B8",
 
-  shadow: "#00000020",
+  // Shadows
+  shadow: "rgba(124,58,237,0.12)",
 
+  // Base
   white: "#FFFFFF",
   black: "#000000",
 
-  green: "#12A150",
-  yellow: "#E5A900",
-  red: "#EF5350",
-  orange: "#F7AD63",
+  // Status
+  green: "#16A34A",
+  yellow: "#CA8A04",
+  red: "#DC2626",
+  orange: "#EA580C",
 
+  // Borders & Inputs
   border: "#E5E7EB",
-  hover: "#F1F3F5",
+  hover: "#F3E8FF",
   input: "#FFFFFF",
-  placeholder: "#9CA3AF",
+  placeholder: "#94A3B8",
 };

@@ -5,38 +5,59 @@ const Container = styled.div`
   flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 8px;
 `;
 
 const Label = styled.label`
   font-size: 12px;
-  color: ${({ theme }) => theme.text_secondary};
-  padding: 0px 4px;
+  font-weight: 600;
+  letter-spacing: 1px;
   text-transform: uppercase;
+  color: ${({ theme }) => theme.text_secondary};
+  padding-left: 4px;
 `;
 
 const OutlinedInput = styled.div`
-  border-radius: 8px;
-  border: 0.5px solid ${({ theme }) => theme.text_secondary + 70};
-  background-color: transparent;
-  color: ${({ theme }) => theme.text_secondary};
-  outline: none;
-  padding: 14px;
+  border-radius: 14px;
+  border: 1px solid ${({ theme }) => theme.border};
+  background: ${({ theme }) => theme.input};
+  color: ${({ theme }) => theme.text_primary};
+
+  padding: 14px 16px;
+
   display: flex;
-  align-items: center;
-  gap: 12px;
+  align-items: flex-start;
+  transition: all 0.3s ease;
+
+  &:hover {
+    border-color: ${({ theme }) => theme.primary}55;
+  }
+
   &:focus-within {
     border-color: ${({ theme }) => theme.primary};
+    box-shadow: 0 0 0 4px ${({ theme }) => theme.primary}22;
+    transform: translateY(-1px);
   }
 `;
 
 const Input = styled.input`
   width: 100%;
-  font-size: 14px;
-  outline: none;
   border: none;
-  background-color: transparent;
-  color: ${({ theme }) => theme.text_secondary};
+  outline: none;
+  resize: none;
+
+  background: transparent;
+
+  color: ${({ theme }) => theme.text_primary};
+
+  font-size: 15px;
+  font-family: inherit;
+  line-height: 1.6;
+
+  &::placeholder {
+    color: ${({ theme }) => theme.placeholder};
+  }
+
   &:focus {
     outline: none;
   }
@@ -55,6 +76,7 @@ const TextInput = ({
   return (
     <Container>
       <Label>{label}</Label>
+
       <OutlinedInput>
         <Input
           as={textArea ? "textarea" : "input"}

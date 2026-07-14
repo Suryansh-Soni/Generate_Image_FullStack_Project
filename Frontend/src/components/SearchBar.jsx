@@ -3,34 +3,75 @@ import styled from "styled-components";
 import { SearchOutlined } from "@mui/icons-material";
 
 const SearchBarContainer = styled.div`
-  max-width: 550px;
-  display: flex;
   width: 90%;
-  border: 1px solid ${({ theme }) => theme.text_secondary + "90"};
-  color: ${({ theme }) => theme.text_primary};
-  border-radius: 8px;
-  padding: 12px;
-  gap: 6px;
+  max-width: 650px;
+
+  display: flex;
   align-items: center;
+  gap: 12px;
+
+  padding: 14px 18px;
+
+  border-radius: 16px;
+  border: 1px solid ${({ theme }) => theme.border};
+
+  background: ${({ theme }) => theme.card};
+
+  color: ${({ theme }) => theme.text_primary};
+
+  box-shadow: 0 8px 25px ${({ theme }) => theme.shadow};
+
+  transition: all 0.3s ease;
+
+  &:hover {
+    border-color: ${({ theme }) => theme.primary}55;
+  }
+
+  &:focus-within {
+    border-color: ${({ theme }) => theme.primary};
+    box-shadow:
+      0 0 0 4px ${({ theme }) => theme.primary}20,
+      0 10px 30px ${({ theme }) => theme.shadow};
+    transform: translateY(-2px);
+  }
+
+  @media (max-width: 600px) {
+    width: 100%;
+    padding: 12px 14px;
+  }
+`;
+
+const SearchIcon = styled(SearchOutlined)`
+  color: ${({ theme }) => theme.primary};
+  font-size: 24px !important;
+`;
+
+const Input = styled.input`
+  flex: 1;
+
+  border: none;
+  outline: none;
+  background: transparent;
+
+  color: ${({ theme }) => theme.text_primary};
+
+  font-size: 16px;
+  font-family: inherit;
+
+  &::placeholder {
+    color: ${({ theme }) => theme.placeholder};
+  }
 `;
 
 const SearchBar = ({ search, handleChange }) => {
   return (
     <SearchBarContainer>
-      <SearchOutlined />
-      <input
+      <SearchIcon />
+      <Input
         type="text"
-        placeholder="Search with prompt!"
+        placeholder="Search by prompt or author..."
         value={search}
         onChange={handleChange}
-        style={{
-          border: "none",
-          outline: "none",
-          width: "100%",
-          color: "inherit",
-          fontSize: "16px",
-          background: "transparent",
-        }}
       />
     </SearchBarContainer>
   );

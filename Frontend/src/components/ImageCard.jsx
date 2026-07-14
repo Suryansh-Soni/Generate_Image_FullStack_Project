@@ -4,18 +4,25 @@ import { LazyLoadImage } from "react-lazy-load-image-component";
 import { DownloadRounded } from "@mui/icons-material";
 import FileSaver from "file-saver";
 import { Avatar } from "@mui/material";
+
 const Card = styled.div`
   position: relative;
-  display: flex;
-  border-radius: 20px;
   overflow: hidden;
-  box-shadow: 1px 2px 40px 8px ${({ theme }) => theme.black + 60};
+  border-radius: 22px;
   cursor: pointer;
-  transition: all 0.3s ease;
+
+  background: ${({ theme }) => theme.card};
+
+  border: 1px solid ${({ theme }) => theme.border};
+
+  box-shadow: 0 12px 35px ${({ theme }) => theme.shadow};
+
+  transition: all 0.35s ease;
 
   &:hover {
-    box-shadow: 1px 2px 40px 8px ${({ theme }) => theme.black + 80};
-    transform: scale(1.05);
+    transform: translateY(-8px);
+    box-shadow: 0 22px 45px ${({ theme }) => theme.shadow};
+    border-color: ${({ theme }) => theme.primary}55;
   }
 
   &:nth-child(7n + 1) {
@@ -24,25 +31,38 @@ const Card = styled.div`
   }
 `;
 
+const StyledImage = styled(LazyLoadImage)`
+  width: 100%;
+  display: block;
+  transition: transform 0.5s ease;
+
+  ${Card}:hover & {
+    transform: scale(1.08);
+  }
+`;
+
 const HoverOverlay = styled.div`
   position: absolute;
+  inset: 0;
+
   opacity: 0;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
 
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  gap: 10px;
+  justify-content: flex-end;
 
-  padding: 12px;
-  backdrop-filter: blur(2px);
-  background: rgba(0, 0, 0, 0.5);
-  color: ${({ theme }) => theme.white};
-  transition: opacity 0.3s ease;
-  border-radius: 20px;
+  padding: 18px;
+
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.88),
+    rgba(0, 0, 0, 0.45),
+    rgba(0, 0, 0, 0.1)
+  );
+
+  backdrop-filter: blur(4px);
+
+  transition: all 0.35s ease;
 
   ${Card}:hover & {
     opacity: 1;
@@ -50,45 +70,86 @@ const HoverOverlay = styled.div`
 `;
 
 const Prompt = styled.div`
-  font-weight: 400;
+  color: white;
   font-size: 15px;
-  color: ${({ theme }) => theme.white};
+  line-height: 1.5;
+  margin-bottom: 16px;
+
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+`;
+
+const Bottom = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 `;
 
 const Author = styled.div`
-  font-weight: 600;
-  font-size: 14px;
   display: flex;
-  gap: 8px;
   align-items: center;
-  color: ${({ theme }) => theme.white};
+  gap: 10px;
+
+  color: white;
+  font-weight: 600;
+`;
+
+const DownloadButton = styled.div`
+  width: 42px;
+  height: 42px;
+
+  border-radius: 50%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: rgba(255, 255, 255, 0.12);
+
+  backdrop-filter: blur(8px);
+
+  cursor: pointer;
+
+  transition: 0.3s;
+
+  &:hover {
+    background: ${({ theme }) => theme.primary};
+    transform: scale(1.12);
+  }
 `;
 
 const ImageCard = ({ item }) => {
   return (
     <Card>
-      <LazyLoadImage alt="item?.prompt" width="100%" src={item?.photo} />
+      <StyledImage alt={item?.prompt} src={item?.photo} width="100%" />
+
       <HoverOverlay>
         <Prompt>{item?.prompt}</Prompt>
-        <div
-          style={{
-            width: "100%",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "space-between",
-          }}
-        >
+
+        <Bottom>
           <Author>
-            <Avatar sx={{ width: 32, height: 32 }}>
+            <Avatar
+              sx={{
+                width: 38,
+                height: 38,
+                bgcolor: "#7C3AED",
+                fontWeight: 700,
+              }}
+            >
               {item?.name?.charAt(0).toUpperCase()}
             </Avatar>
 
             {item?.name || "Anonymous"}
           </Author>
-          <DownloadRounded
-            onClick={() => FileSaver.saveAs(item?.photo, "download.jpg")}
-          />
-        </div>
+
+          <DownloadButton
+            onClick={() => FileSaver.saveAs(item?.photo, "AI_Image.jpg")}
+          >
+            <DownloadRounded style={{ color: "white", fontSize: 22 }} />
+          </DownloadButton>
+        </Bottom>
       </HoverOverlay>
     </Card>
   );

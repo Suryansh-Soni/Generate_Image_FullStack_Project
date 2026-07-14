@@ -1,34 +1,43 @@
-import React from "react";
-import { useState } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import GenerateImageForm from "../components/GenerateImageForm.jsx";
 import GeneratedImageCard from "../components/GeneratedImageCard.jsx";
+
 const Container = styled.div`
-  height: 100%;
-  overflow-y: scroll;
+  min-height: 100%;
+  overflow-y: auto;
   background: ${({ theme }) => theme.bg};
-  padding: 30px 30px;
-  padding-bottom: 50px;
+  padding: 40px 30px 60px;
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 20px;
+  justify-content: center;
+  align-items: flex-start;
 
   @media (max-width: 768px) {
-    padding: 6px 10px;
+    padding: 20px 14px 40px;
   }
 `;
 
 const Wrapper = styled.div`
-  flex: 1;
   width: 100%;
-  heigth: fit-content;
-  max-width: 1200px;
-  gap: 8%;
+  max-width: 1300px;
+
   display: flex;
-  justify-content: center;
-  @media (max-width: 768px) {
+  gap: 35px;
+  align-items: stretch;
+
+  padding: 28px;
+  border-radius: 28px;
+
+  background: ${({ theme }) => theme.card};
+  border: 1px solid ${({ theme }) => theme.border};
+  box-shadow: 0 18px 45px ${({ theme }) => theme.shadow};
+
+  transition: 0.3s ease;
+
+  @media (max-width: 900px) {
     flex-direction: column;
+    padding: 20px;
+    gap: 25px;
   }
 `;
 
@@ -38,6 +47,7 @@ const CreatePost = () => {
     prompt: "",
     photo: "",
   });
+
   const [generateImageLoading, setGenerateImageLoading] = useState(false);
   const [createPostLoading, setCreatePostLoading] = useState(false);
 
@@ -52,7 +62,11 @@ const CreatePost = () => {
           setCreatePostLoading={setCreatePostLoading}
           generateImageLoading={generateImageLoading}
         />
-        <GeneratedImageCard src={post?.photo} loading={generateImageLoading} />
+
+        <GeneratedImageCard
+          src={post?.photo}
+          loading={generateImageLoading}
+        />
       </Wrapper>
     </Container>
   );
