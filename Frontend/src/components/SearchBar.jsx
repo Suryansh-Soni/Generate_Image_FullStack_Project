@@ -6,21 +6,23 @@ const SearchBarContainer = styled.div`
   max-width: 550px;
   display: flex;
   width: 90%;
-  border: 1px solid ${({ theme }) => theme.text_secondary + 90};
+  border: 1px solid ${({ theme }) => theme.text_secondary + "90"};
   color: ${({ theme }) => theme.text_primary};
   border-radius: 8px;
   padding: 12px;
-  cursor: pointer;
   gap: 6px;
   align-items: center;
 `;
 
-const SearchBar = () => {
+const SearchBar = ({ search, handleChange }) => {
   return (
     <SearchBarContainer>
       <SearchOutlined />
       <input
-        placeholder="Search with promt!"
+        type="text"
+        placeholder="Search with prompt!"
+        value={search}
+        onChange={handleChange}
         style={{
           border: "none",
           outline: "none",
