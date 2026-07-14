@@ -33,7 +33,11 @@ const Wrapper = styled.div`
 `;
 
 const CreatePost = () => {
-  const [post, setPost] = useState("");
+  const [post, setPost] = useState({
+    name: "",
+    prompt: "",
+    photo: "",
+  });
   const [generateImageLoading, setGenerateImageLoading] = useState(false);
   const [createPostLoading, setCreatePostLoading] = useState(false);
 
