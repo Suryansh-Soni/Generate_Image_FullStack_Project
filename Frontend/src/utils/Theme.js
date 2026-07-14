@@ -1,33 +1,33 @@
 export const darkTheme = {
   // Backgrounds
-  bg: "#0B1120",
-  bgLight: "#111827",
-  bgDark: "#070C18",
+  bg: "#000000",
+  bgLight: "#111111",
+  bgDark: "#050505",
 
   // Brand Colors
-  primary: "#7C3AED",
-  secondary: "#A855F7",
+  primary: "#F97316",
+  secondary: "#FB923C",
 
   // Navbar
-  navbar: "rgba(17, 24, 39, 0.75)",
-  arrow: "#C4B5FD",
+  navbar: "rgba(0,0,0,0.85)",
+  arrow: "#FDBA74",
 
   // Text
-  menu_primary_text: "#F8FAFC",
-  menu_secondary_text: "#CBD5E1",
+  menu_primary_text: "#FFFFFF",
+  menu_secondary_text: "#D1D5DB",
 
-  text_primary: "#F8FAFC",
-  text_secondary: "#CBD5E1",
+  text_primary: "#FFFFFF",
+  text_secondary: "#D1D5DB",
 
   // Cards
-  card: "rgba(30, 41, 59, 0.72)",
-  card_light: "rgba(51, 65, 85, 0.60)",
+  card: "rgba(17,17,17,0.85)",
+  card_light: "rgba(31,31,31,0.75)",
 
   // Disabled
-  disabled: "#64748B",
+  disabled: "#6B7280",
 
   // Shadows
-  shadow: "rgba(124, 58, 237, 0.25)",
+  shadow: "rgba(249,115,22,0.25)",
 
   // Base
   white: "#FFFFFF",
@@ -37,45 +37,45 @@ export const darkTheme = {
   green: "#22C55E",
   yellow: "#FACC15",
   red: "#EF4444",
-  orange: "#FB923C",
+  orange: "#F97316",
 
   // Borders & Inputs
-  border: "rgba(255,255,255,0.08)",
-  hover: "rgba(124,58,237,0.12)",
-  input: "rgba(17,24,39,0.80)",
-  placeholder: "#94A3B8",
+  border: "rgba(249,115,22,0.20)",
+  hover: "rgba(249,115,22,0.12)",
+  input: "rgba(17,17,17,0.90)",
+  placeholder: "#9CA3AF",
 };
 
 export const lightTheme = {
   // Backgrounds
-  bg: "#F8FAFC",
-  bgLight: "#FFFFFF",
-  bgDark: "#EEF2FF",
+  bg: "#FFFFFF",
+  bgLight: "#FFF7ED",
+  bgDark: "#FFEDD5",
 
   // Brand Colors
-  primary: "#7C3AED",
-  secondary: "#A855F7",
+  primary: "#F97316",
+  secondary: "#FB923C",
 
   // Navbar
   navbar: "rgba(255,255,255,0.90)",
-  arrow: "#6D28D9",
+  arrow: "#EA580C",
 
   // Text
   menu_primary_text: "#111827",
-  menu_secondary_text: "#64748B",
+  menu_secondary_text: "#6B7280",
 
   text_primary: "#111827",
-  text_secondary: "#64748B",
+  text_secondary: "#6B7280",
 
   // Cards
   card: "#FFFFFF",
-  card_light: "#F3F4F6",
+  card_light: "#FFF7ED",
 
   // Disabled
-  disabled: "#94A3B8",
+  disabled: "#9CA3AF",
 
   // Shadows
-  shadow: "rgba(124,58,237,0.12)",
+  shadow: "rgba(249,115,22,0.15)",
 
   // Base
   white: "#FFFFFF",
@@ -88,8 +88,8 @@ export const lightTheme = {
   orange: "#EA580C",
 
   // Borders & Inputs
-  border: "#E5E7EB",
-  hover: "#F3E8FF",
+  border: "#FED7AA",
+  hover: "#FFEDD5",
   input: "#FFFFFF",
-  placeholder: "#94A3B8",
+  placeholder: "#9CA3AF",
 };

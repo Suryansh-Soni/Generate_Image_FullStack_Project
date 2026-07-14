@@ -12,17 +12,16 @@ const Card = styled.div`
   cursor: pointer;
 
   background: ${({ theme }) => theme.card};
-
   border: 1px solid ${({ theme }) => theme.border};
 
-  box-shadow: 0 12px 35px ${({ theme }) => theme.shadow};
+  box-shadow: 0 10px 30px ${({ theme }) => theme.shadow};
 
   transition: all 0.35s ease;
 
   &:hover {
     transform: translateY(-8px);
-    box-shadow: 0 22px 45px ${({ theme }) => theme.shadow};
-    border-color: ${({ theme }) => theme.primary}55;
+    border-color: ${({ theme }) => theme.primary};
+    box-shadow: 0 18px 40px ${({ theme }) => theme.shadow};
   }
 
   &:nth-child(7n + 1) {
@@ -55,13 +54,12 @@ const HoverOverlay = styled.div`
 
   background: linear-gradient(
     to top,
-    rgba(0, 0, 0, 0.88),
-    rgba(0, 0, 0, 0.45),
-    rgba(0, 0, 0, 0.1)
+    rgba(0, 0, 0, 0.92),
+    rgba(0, 0, 0, 0.55),
+    rgba(0, 0, 0, 0.15)
   );
 
-  backdrop-filter: blur(4px);
-
+  backdrop-filter: blur(6px);
   transition: all 0.35s ease;
 
   ${Card}:hover & {
@@ -70,9 +68,9 @@ const HoverOverlay = styled.div`
 `;
 
 const Prompt = styled.div`
-  color: white;
+  color: ${({ theme }) => theme.white};
   font-size: 15px;
-  line-height: 1.5;
+  line-height: 1.6;
   margin-bottom: 16px;
 
   display: -webkit-box;
@@ -92,7 +90,7 @@ const Author = styled.div`
   align-items: center;
   gap: 10px;
 
-  color: white;
+  color: ${({ theme }) => theme.white};
   font-weight: 600;
 `;
 
@@ -106,17 +104,25 @@ const DownloadButton = styled.div`
   align-items: center;
   justify-content: center;
 
-  background: rgba(255, 255, 255, 0.12);
+  background: rgba(249, 115, 22, 0.15);
+  border: 1px solid rgba(249, 115, 22, 0.3);
 
   backdrop-filter: blur(8px);
 
   cursor: pointer;
 
-  transition: 0.3s;
+  transition: all 0.3s ease;
 
   &:hover {
     background: ${({ theme }) => theme.primary};
-    transform: scale(1.12);
+    border-color: ${({ theme }) => theme.primary};
+    transform: scale(1.12) rotate(8deg);
+    box-shadow: 0 8px 22px ${({ theme }) => theme.shadow};
+  }
+
+  svg {
+    color: ${({ theme }) => theme.white};
+    font-size: 22px;
   }
 `;
 
@@ -131,12 +137,12 @@ const ImageCard = ({ item }) => {
         <Bottom>
           <Author>
             <Avatar
-              sx={{
+              sx={(theme) => ({
                 width: 38,
                 height: 38,
-                bgcolor: "#7C3AED",
+                bgcolor: "#F97316",
                 fontWeight: 700,
-              }}
+              })}
             >
               {item?.name?.charAt(0).toUpperCase()}
             </Avatar>
@@ -147,7 +153,7 @@ const ImageCard = ({ item }) => {
           <DownloadButton
             onClick={() => FileSaver.saveAs(item?.photo, "AI_Image.jpg")}
           >
-            <DownloadRounded style={{ color: "white", fontSize: 22 }} />
+            <DownloadRounded />
           </DownloadButton>
         </Bottom>
       </HoverOverlay>

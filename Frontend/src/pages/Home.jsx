@@ -9,42 +9,50 @@ import { useState, useEffect } from "react";
 const Container = styled.div`
   min-height: 100%;
   overflow-y: auto;
+
   background: ${({ theme }) => theme.bg};
-  padding: 50px 32px 70px;
+
+  padding: 60px 32px 80px;
+
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 28px;
+  gap: 36px;
 
   @media (max-width: 768px) {
-    padding: 24px 16px 40px;
+    padding: 28px 16px 40px;
+    gap: 28px;
   }
 `;
 
 const Hero = styled.div`
   width: 100%;
   max-width: 900px;
+
   text-align: center;
+
   display: flex;
   flex-direction: column;
-  gap: 18px;
+  gap: 20px;
 `;
 
 const Headline = styled.h1`
   margin: 0;
+
   font-size: 3rem;
   font-weight: 800;
   line-height: 1.2;
+
   color: ${({ theme }) => theme.text_primary};
 
   @media (max-width: 768px) {
-    font-size: 2rem;
+    font-size: 2.1rem;
   }
 `;
 
 const Span = styled.span`
   background: linear-gradient(
-    90deg,
+    135deg,
     ${({ theme }) => theme.primary},
     ${({ theme }) => theme.secondary}
   );
@@ -55,59 +63,70 @@ const Span = styled.span`
 
 const Description = styled.p`
   margin: 0;
-  font-size: 1rem;
-  line-height: 1.7;
+
+  font-size: 16px;
+  line-height: 1.8;
+
   color: ${({ theme }) => theme.text_secondary};
 `;
 
 const Stats = styled.div`
   display: flex;
-  gap: 18px;
   justify-content: center;
+  gap: 18px;
   flex-wrap: wrap;
 `;
 
 const StatCard = styled.div`
-  min-width: 150px;
-  padding: 18px 22px;
+  min-width: 160px;
+
+  padding: 20px;
+
   border-radius: 18px;
 
   background: ${({ theme }) => theme.card};
 
   border: 1px solid ${({ theme }) => theme.border};
 
-  box-shadow: 0 10px 30px ${({ theme }) => theme.shadow};
+  box-shadow: 0 10px 28px ${({ theme }) => theme.shadow};
 
-  transition: 0.3s;
+  transition: all 0.3s ease;
 
   &:hover {
-    transform: translateY(-4px);
+    transform: translateY(-6px);
     border-color: ${({ theme }) => theme.primary};
+    box-shadow: 0 16px 36px ${({ theme }) => theme.shadow};
   }
 `;
 
 const StatNumber = styled.div`
-  font-size: 28px;
-  font-weight: 700;
+  font-size: 30px;
+  font-weight: 800;
+
   color: ${({ theme }) => theme.primary};
 `;
 
 const StatText = styled.div`
   margin-top: 6px;
-  color: ${({ theme }) => theme.text_secondary};
+
   font-size: 14px;
+
+  color: ${({ theme }) => theme.text_secondary};
 `;
 
 const Wrapper = styled.div`
   width: 100%;
   max-width: 1450px;
+
   display: flex;
   justify-content: center;
 `;
 
 const CardWrapper = styled.div`
   width: 100%;
+
   display: grid;
+
   gap: 24px;
 
   @media (min-width: 1200px) {
@@ -124,10 +143,33 @@ const CardWrapper = styled.div`
 `;
 
 const EmptyState = styled.div`
-  padding: 60px;
-  color: ${({ theme }) => theme.text_secondary};
+  width: 100%;
+
+  padding: 80px 20px;
+
   text-align: center;
+
+  color: ${({ theme }) => theme.text_secondary};
+
   font-size: 18px;
+`;
+
+const ErrorMessage = styled.div`
+  width: 100%;
+
+  margin-bottom: 20px;
+
+  padding: 14px 18px;
+
+  border-radius: 14px;
+
+  background: ${({ theme }) => `${theme.red}15`};
+
+  border: 1px solid ${({ theme }) => `${theme.red}40`};
+
+  color: ${({ theme }) => theme.red};
+
+  text-align: center;
 `;
 
 const Home = () => {
@@ -206,12 +248,10 @@ const Home = () => {
       />
 
       <Wrapper>
-        {error && (
-          <div style={{ color: "red", marginBottom: "20px" }}>{error}</div>
-        )}
+        {error && <ErrorMessage>{error}</ErrorMessage>}
 
         {loading ? (
-          <CircularProgress />
+          <CircularProgress sx={{ color: "#F97316" }} />
         ) : (
           <CardWrapper>
             {filterPost.length > 0 ? (

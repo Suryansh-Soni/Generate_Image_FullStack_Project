@@ -9,15 +9,22 @@ import { useState } from "react";
 const Container = styled.div`
   width: 100%;
   min-height: 100vh;
-  display: flex;
+
   background: ${({ theme }) => theme.bg};
   color: ${({ theme }) => theme.text_primary};
-  transition: all 0.35s ease;
+
+  display: flex;
+
+  transition:
+    background 0.35s ease,
+    color 0.35s ease;
 `;
 
-const Wrapper = styled.div`
+const Wrapper = styled.main`
   flex: 1;
+
   min-height: 100vh;
+
   display: flex;
   flex-direction: column;
 `;

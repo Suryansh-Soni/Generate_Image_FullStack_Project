@@ -27,15 +27,19 @@ const OutlinedInput = styled.div`
 
   display: flex;
   align-items: flex-start;
+
   transition: all 0.3s ease;
 
   &:hover {
-    border-color: ${({ theme }) => theme.primary}55;
+    border-color: ${({ theme }) => theme.primary};
+    box-shadow: 0 6px 18px ${({ theme }) => theme.shadow};
   }
 
   &:focus-within {
     border-color: ${({ theme }) => theme.primary};
-    box-shadow: 0 0 0 4px ${({ theme }) => theme.primary}22;
+    box-shadow:
+      0 0 0 3px ${({ theme }) => theme.primary}33,
+      0 8px 24px ${({ theme }) => theme.shadow};
     transform: translateY(-1px);
   }
 `;
@@ -47,7 +51,6 @@ const Input = styled.input`
   resize: none;
 
   background: transparent;
-
   color: ${({ theme }) => theme.text_primary};
 
   font-size: 15px;
@@ -56,10 +59,15 @@ const Input = styled.input`
 
   &::placeholder {
     color: ${({ theme }) => theme.placeholder};
+    opacity: 1;
   }
 
   &:focus {
     outline: none;
+  }
+
+  textarea& {
+    min-height: 120px;
   }
 `;
 

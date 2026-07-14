@@ -18,21 +18,25 @@ const Form = styled.div`
 const Top = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 12px;
 `;
 
 const Title = styled.h1`
   margin: 0;
+
   font-size: 34px;
-  font-weight: 700;
-  color: ${({ theme }) => theme.text_primary};
+  font-weight: 800;
   line-height: 1.2;
+
+  color: ${({ theme }) => theme.text_primary};
 `;
 
 const Desc = styled.p`
   margin: 0;
+
   font-size: 16px;
-  line-height: 1.7;
+  line-height: 1.8;
+
   color: ${({ theme }) => theme.text_secondary};
 `;
 
@@ -43,15 +47,29 @@ const Body = styled.div`
 `;
 
 const Note = styled.div`
-  padding: 14px 18px;
-  border-radius: 14px;
+  padding: 16px 18px;
 
-  background: ${({ theme }) => theme.hover};
+  border-radius: 16px;
+
+  background: ${({ theme }) => theme.card_light};
+
   border: 1px solid ${({ theme }) => theme.border};
 
   color: ${({ theme }) => theme.text_secondary};
+
   font-size: 14px;
-  line-height: 1.6;
+  line-height: 1.7;
+
+  transition: all 0.3s ease;
+
+  &:hover {
+    border-color: ${({ theme }) => theme.primary};
+    box-shadow: 0 8px 22px ${({ theme }) => theme.shadow};
+  }
+
+  b {
+    color: ${({ theme }) => theme.primary};
+  }
 `;
 
 const Actions = styled.div`
@@ -64,13 +82,16 @@ const Actions = styled.div`
 `;
 
 const ErrorMessage = styled.div`
-  padding: 12px 16px;
-  border-radius: 12px;
+  padding: 14px 16px;
 
-  background: rgba(239, 83, 80, 0.12);
-  border: 1px solid rgba(239, 83, 80, 0.35);
+  border-radius: 14px;
+
+  background: ${({ theme }) => `${theme.red}15`};
+
+  border: 1px solid ${({ theme }) => `${theme.red}55`};
 
   color: ${({ theme }) => theme.red};
+
   font-size: 14px;
   font-weight: 500;
 `;
@@ -168,8 +189,8 @@ const GenerateImageForm = ({
         {error && <ErrorMessage>{error}</ErrorMessage>}
 
         <Note>
-          ✨ Generate your image first, preview it, and then publish it to the
-          community showcase.
+          ✨ <b>Tip:</b> Generate your image first, preview it, and then publish
+          it to the community showcase.
         </Note>
       </Body>
 

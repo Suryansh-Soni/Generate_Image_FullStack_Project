@@ -15,35 +15,42 @@ const SearchBarContainer = styled.div`
   border-radius: 16px;
   border: 1px solid ${({ theme }) => theme.border};
 
-  background: ${({ theme }) => theme.card};
+  background: ${({ theme }) => theme.input};
 
   color: ${({ theme }) => theme.text_primary};
 
-  box-shadow: 0 8px 25px ${({ theme }) => theme.shadow};
+  box-shadow: 0 8px 24px ${({ theme }) => theme.shadow};
 
   transition: all 0.3s ease;
 
   &:hover {
-    border-color: ${({ theme }) => theme.primary}55;
+    border-color: ${({ theme }) => theme.primary};
+    background: ${({ theme }) => theme.card_light};
+    box-shadow: 0 10px 30px ${({ theme }) => theme.shadow};
   }
 
   &:focus-within {
     border-color: ${({ theme }) => theme.primary};
+    background: ${({ theme }) => theme.card};
+
     box-shadow:
-      0 0 0 4px ${({ theme }) => theme.primary}20,
-      0 10px 30px ${({ theme }) => theme.shadow};
+      0 0 0 4px ${({ theme }) => `${theme.primary}20`},
+      0 12px 32px ${({ theme }) => theme.shadow};
+
     transform: translateY(-2px);
   }
 
   @media (max-width: 600px) {
     width: 100%;
     padding: 12px 14px;
+    border-radius: 14px;
   }
 `;
 
 const SearchIcon = styled(SearchOutlined)`
   color: ${({ theme }) => theme.primary};
   font-size: 24px !important;
+  transition: color 0.3s ease;
 `;
 
 const Input = styled.input`
@@ -60,6 +67,7 @@ const Input = styled.input`
 
   &::placeholder {
     color: ${({ theme }) => theme.placeholder};
+    opacity: 1;
   }
 `;
 

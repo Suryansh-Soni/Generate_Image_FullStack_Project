@@ -3,11 +3,16 @@ import React from "react";
 import styled from "styled-components";
 
 const StyledButton = styled.button`
-  border: none;
+  border: 1px solid
+    ${({ theme, $variant }) =>
+      $variant === "secondary" ? theme.primary : theme.primary};
+
   outline: none;
   border-radius: 14px;
 
-  color: ${({ theme }) => theme.white};
+  color: ${({ theme, $variant }) =>
+    $variant === "secondary" ? theme.primary : theme.white};
+
   font-size: 15px;
   font-weight: 600;
   letter-spacing: 0.3px;
@@ -25,12 +30,12 @@ const StyledButton = styled.button`
 
   flex: ${({ $flex }) => ($flex ? 1 : "initial")};
 
-  background: ${({ $variant, theme }) =>
+  background: ${({ theme, $variant }) =>
     $variant === "secondary"
-      ? `linear-gradient(135deg, ${theme.secondary}, ${theme.primary})`
+      ? "transparent"
       : `linear-gradient(135deg, ${theme.primary}, ${theme.secondary})`};
 
-  box-shadow: 0 8px 24px ${({ theme }) => theme.primary + "35"};
+  box-shadow: 0 8px 24px ${({ theme }) => theme.shadow};
 
   opacity: ${({ $isDisabled, $isLoading }) =>
     $isDisabled ? 0.45 : $isLoading ? 0.8 : 1};
@@ -38,8 +43,19 @@ const StyledButton = styled.button`
   transition: all 0.3s ease;
 
   &:hover:not(:disabled) {
+    background: ${({ theme, $variant }) =>
+      $variant === "secondary"
+        ? theme.hover
+        : `linear-gradient(135deg, ${theme.secondary}, ${theme.primary})`};
+
+    color: ${({ theme, $variant }) =>
+      $variant === "secondary" ? theme.primary : theme.white};
+
+    border-color: ${({ theme }) => theme.primary};
+
     transform: translateY(-2px);
-    box-shadow: 0 12px 30px ${({ theme }) => theme.primary + "55"};
+
+    box-shadow: 0 12px 30px ${({ theme }) => theme.shadow};
   }
 
   &:active:not(:disabled) {
@@ -50,9 +66,18 @@ const StyledButton = styled.button`
     pointer-events: none;
   }
 
+  svg {
+    font-size: 20px;
+  }
+
   @media (max-width: 600px) {
     padding: 10px 16px;
     font-size: 14px;
+    border-radius: 12px;
+
+    svg {
+      font-size: 18px;
+    }
   }
 `;
 
