@@ -2,7 +2,9 @@ import React from "react";
 import styled from "styled-components";
 import SearchBar from "../components/SearchBar.jsx";
 import ImageCard from "../components/ImageCard.jsx";
-
+import { GetPost } from "../api";
+import { CircularProgress } from "@mui/material";
+import { useState, useEffect } from "react";
 const Container = styled.div`
   height: 100%;
   overflow-y: scroll;
@@ -63,32 +65,79 @@ const CardWrapper = styled.div`
     grid-template-columns: repeat(2, 1fr);
   }
 `;
-
 const Home = () => {
-  const item = {
-    photo:
-      "https://media.istockphoto.com/id/1381637603/photo/mountain-landscape.jpg?s=612x612&w=0&k=20&c=w64j3fW8C96CfYo3kbi386rs_sHH_6BGe8lAAAFS-y4=",
-    author: "Suryansh",
-    prompt: "Mountain landscape generated with AI",
+  const [post, setPost] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+  const [search, setSearch] = useState("");
+  const [filterPost, setFilterPost] = useState([]);
+
+  const getPosts = async () => {
+    setLoading(true);
+    await GetPost()
+      .then((res) => {
+        setPost(res?.data?.data);
+        setFilterPost(res?.data?.data);
+        setLoading(false);
+      })
+      .catch((error) => {
+        setError(error?.response?.data?.message);
+        setLoading(false);
+      });
   };
 
+  useEffect(() => {
+    getPosts();
+  }, []);
+
+  useEffect(() => {
+    const searchTerm = search.toLowerCase().trim();
+
+    if (!searchTerm) {
+      setFilterPost(post);
+      return;
+    }
+
+    const filteredPosts = post.filter((item) => {
+      const promptMatch = item?.prompt?.toLowerCase().includes(searchTerm);
+      const nameMatch = item?.name?.toLowerCase().includes(searchTerm);
+
+      return promptMatch || nameMatch;
+    });
+
+    setFilterPost(filteredPosts);
+  }, [post, search]);
+  useEffect(() => {
+    console.log("Search:", search);
+  }, [search]);
   return (
     <Container>
       <Headline>Explore Popular Post !</Headline>
       <Span>Generate With AI</Span>
-      <SearchBar />
-
+      <SearchBar
+        search={search}
+        handleChange={(e) => setSearch(e.target.value)}
+      />
       <Wrapper>
-        <CardWrapper>
-          <ImageCard item={item} />
-          <ImageCard item={item} />
-          <ImageCard item={item} />
-          <ImageCard item={item} />
-          <ImageCard item={item} />
-          <ImageCard item={item} />
-          <ImageCard item={item} />
-          <ImageCard item={item} />
-        </CardWrapper>
+        {error && <div style={{ color: "red" }}>{error}</div>}
+        {loading ? (
+          <CircularProgress />
+        ) : (
+          <CardWrapper>
+            {filterPost.length > 0 ? (
+              <>
+                {filterPost
+                  .slice()
+                  .reverse()
+                  .map((item, index) => (
+                    <ImageCard key={item._id} item={item} />
+                  ))}
+              </>
+            ) : (
+              <>No Posts Found !!</>
+            )}
+          </CardWrapper>
+        )}
       </Wrapper>
     </Container>
   );
