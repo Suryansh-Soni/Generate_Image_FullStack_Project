@@ -74,15 +74,16 @@ const ImageCard = ({ item }) => {
           style={{
             width: "100%",
             display: "flex",
-            alignItem: "center",
+            alignItems: "center",
             justifyContent: "space-between",
           }}
         >
           <Author>
-            <Avatar sx={{ width: "32px", heigth: "32px" }}>
-              {item?.author[0]}
+            <Avatar sx={{ width: 32, height: 32 }}>
+              {item?.name?.charAt(0).toUpperCase()}
             </Avatar>
-            {item?.author}
+
+            {item?.name || "Anonymous"}
           </Author>
           <DownloadRounded
             onClick={() => FileSaver.saveAs(item?.photo, "download.jpg")}
